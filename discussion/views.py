@@ -20,7 +20,10 @@ class DiscussionList(generics.ListCreateAPIView):
     """
     queryset = DiscussionThread.objects.all()
     serializer_class = DiscussionSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    # IsAuthenticated is used so that random people can't just view medical
+    # cases without authentication.
+    permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -42,7 +45,7 @@ class DiscussionComments(generics.ListCreateAPIView):
     """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     lookup_field = 'discussion'
 
     def perform_create(self, serializer):
