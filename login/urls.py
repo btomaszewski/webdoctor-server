@@ -5,8 +5,8 @@ urlpatterns = [
     url(r'^auth-token/',
         views.ObtainAuthToken.as_view(),
         name='obtain-auth-token'),
-    url(r'^auth-test/',
+    url(r'^test/',
         views.AuthTest.as_view(),
-        name='auth-test'),
+        name='test'),
 ]
 

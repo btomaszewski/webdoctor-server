@@ -4,7 +4,18 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
+from login.serializers import NewUserSerializer
 
+
+class Register(APIView):
+    """
+    Register a new user.
+    """
+    serializer_class = NewUserSerializer
+
+    def post(self, request):
+        pass
+        
 
 class ObtainAuthToken(APIView):
     """
@@ -40,7 +51,7 @@ class AuthTest(APIView):
     Use this view to test if your auth token is still valid. If you receive
     response code 200 you should be good. If you receive code 401 (Unauthorized)
     then your authentication method is no longer valid and you need a new auth
-    token.
+    token. If your auth succeeds then you will get a response of {"success": true}.
     """
     permission_classes = (permissions.IsAuthenticated,)
 
