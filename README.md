@@ -34,5 +34,7 @@ password resets and verifying that a doctor is licensed to practice.
 
 Finally the (NYI) `content` module deals with content which is used by clients
 for performing medicine. This includes searchable documents and anything else
-relevant.
+relevant. These files will be managed by administrators and updated on the device
+when the are changed on the server.
+
 
