@@ -14,13 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
+from webdoctor import settings
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^discussion/', include('discussion.urls')),
     url(r'^login/', include('login.urls',
                             namespace='login')),
+    url(r'^content/', include('content.urls',
+                              namespace='content')),
     url(r'^api-auth/', include('rest_framework.urls',
                                namespace='rest_framework')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
