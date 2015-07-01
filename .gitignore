@@ -1,4 +1,7 @@
 
+# webdoctor-server
+media/
+
 # Python
 __pycache__/
 
