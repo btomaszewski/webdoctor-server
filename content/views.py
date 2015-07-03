@@ -52,13 +52,3 @@ class FileListView(generics.ListAPIView):
             if version is not None:
                 queryset = queryset.filter(version=version)
         return queryset
-
-
-class FileGetView(views.APIView):
-
-    def get(self, request, pk):
-        try:
-            file = ContentFile.objects.get(pk=pk)
-            print(file.file)
-        except ContentFile.DoesNotExist:
-            raise Http404()
