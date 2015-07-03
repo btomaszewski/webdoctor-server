@@ -12,9 +12,18 @@ To run the server you will need Python 3 or greater which should come with
 to install all the requirements. Using [virtualenv](https://virtualenv.pypa.io/en/latest/)
 is recommended to make it easier to manage your Python environment.
 
+You will also need to configure the database. To set up initial settings you will
+need to run `python manage.py makemigrations` followed by `python manage.py migrate`.
+These commands set up the database. Eventually migration files will be included but
+not while the models are still subject to change on a whim.
+
 ## Running
-To actually start the server simply `cd` into the directory and run
-`python manage.py runserver`.
+To run the server in production please follow Django's deployment checklist and
+best practices. Links can be found in `webdoctor/settings.py`.
+
+To actually start the server `cd` into the directory and run
+`python manage.py runserver`.<br/>
+To run it in production run `python manage.py runserver 0.0.0.0`.
 
 ## WSGI and FastCGI
 Because webdoctor-server uses Django it can also be run using WSGI or FastCGI.
