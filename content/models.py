@@ -10,6 +10,18 @@ def name_validator(value):
     if os.path.normpath(value) != value:
         raise ValidationError("Invalid name")
 
+def file_validator(value):
+    """
+    Validates that the filename ends with an accepted extension
+    @type value: str
+    ":param value: string to validate
+    """
+    endings = ('.pdf', '.txt', )
+    for e in endings:
+        if str(value).endswith(e):
+            return True
+    raise ValidationError('Invalid extension')
+
 
 class ContentFile(models.Model):
     """
@@ -19,7 +31,13 @@ class ContentFile(models.Model):
     :version: content version
     :file: reference to the actual file in the filesystem
     """
-    name = models.CharField(max_length=200, validators=[name_validator,])
-    version = models.PositiveIntegerField()
-    file = models.FileField(upload_to='./%Y-%m/')
 
+    CONTENT_FILE_TYPES = (
+        ('pdf', 'PDF'),
+        ('txt', 'Raw Text'),
+    )
+
+    name = models.CharField(max_length=200, validators=[name_validator, ])
+    version = models.PositiveIntegerField()
+    type = models.CharField(max_length=10, choices=CONTENT_FILE_TYPES)
+    file = models.FileField(upload_to='./%Y-%m/', validators=[file_validator, ])

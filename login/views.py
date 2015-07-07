@@ -55,7 +55,7 @@ class AuthTest(APIView):
     """
     permission_classes = (permissions.IsAuthenticated,)
 
-    def post(self, request):
+    def get(self, request):
         # We simply return success as true because if auth fails
         # they will get error code
         return Response({"success": True})

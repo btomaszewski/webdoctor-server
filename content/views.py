@@ -1,5 +1,4 @@
 from django.db.models import Q, Max
-from django.http import Http404
 from rest_framework import generics, views, permissions
 from rest_framework.parsers import MultiPartParser, FormParser
 from content.models import ContentFile
@@ -7,6 +6,13 @@ from content.serializers import ContentFileSerializer
 
 def str_to_bool(s):
     return s.lower() == 'true'
+
+def get_extension(filename):
+    """
+    :type filename: str
+    """
+    index = filename.index('.')
+    return filename[index + 1:]
 
 class FileUploadView(generics.CreateAPIView):
     """
@@ -21,7 +27,9 @@ class FileUploadView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         current_count = len(ContentFile.objects.filter(name__iexact=self.request.data['name']))
-        serializer.save(version=current_count + 1)
+        # get filename
+        file_type = get_extension(str(serializer.initial_data['file']))
+        serializer.save(version=current_count + 1, type=file_type)
 
 
 class FileListView(generics.ListAPIView):
