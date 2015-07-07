@@ -48,14 +48,10 @@ class ValidateDoctorLicense(APIView):
 
 class AuthTest(APIView):
     """
-    Use this view to test if your auth token is still valid. If you receive
-    response code 200 you should be good. If you receive code 401 (Unauthorized)
-    then your authentication method is no longer valid and you need a new auth
-    token. If your auth succeeds then you will get a response of {"success": true}.
+    Use this view to test if your auth token is still valid. The response
+    is a JSON object with "result" which will be true if your authentication
+    is valid and false otherwise.
     """
-    permission_classes = (permissions.IsAuthenticated,)
-
+    
     def get(self, request):
-        # We simply return success as true because if auth fails
-        # they will get error code
-        return Response({"success": True})
+        return Response({"result": request.user and request.user.is_authenticated()})
