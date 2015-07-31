@@ -34,7 +34,6 @@ class ContentFile(models.Model):
 
     CONTENT_FILE_TYPES = (
         ('pdf', 'PDF'),
-        ('txt', 'Raw Text'),
     )
 
     name = models.CharField(max_length=200, validators=[name_validator, ])
