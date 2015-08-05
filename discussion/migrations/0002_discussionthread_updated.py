@@ -2,8 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import datetime
-from django.utils.timezone import utc
+from django.utils import timezone
 
 
 class Migration(migrations.Migration):
@@ -16,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='discussionthread',
             name='updated',
-            field=models.DateTimeField(default=datetime.datetime(2015, 7, 31, 15, 51, 36, 361733, tzinfo=utc), auto_now=True),
+            field=models.DateTimeField(default=timezone.now(), auto_now=True),
             preserve_default=False,
         ),
     ]
