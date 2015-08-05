@@ -62,6 +62,8 @@ REST_FRAMEWORK = {
         # We have to add in TokenAuthentication
         'rest_framework.authentication.TokenAuthentication',
     ),
+    # Default page size for all paginators
+    'PAGE_SIZE': 30,
 }
 
 ROOT_URLCONF = 'webdoctor.urls'
@@ -107,7 +109,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

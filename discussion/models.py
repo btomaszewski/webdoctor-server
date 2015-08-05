@@ -12,6 +12,7 @@ class DiscussionThread(models.Model):
     owner = models.ForeignKey('auth.User')
     title = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
 
 class Comment(models.Model):
@@ -22,6 +23,12 @@ class Comment(models.Model):
     discussion = models.ForeignKey(DiscussionThread)
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        # update the discussion so it's `updated` field will change
+        self.discussion.save()
+        # now actually call save
+        super(Comment, self).save(*args, **kwargs)
 
 
 class MedicalCase(models.Model):

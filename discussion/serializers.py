@@ -3,11 +3,11 @@ from discussion.models import DiscussionThread, Comment, MedicalCase
 
 
 class DiscussionSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    owner = serializers.ReadOnlyField(source='owner.first_name')
 
     class Meta:
         model = DiscussionThread
-        fields = ('owner', 'title', 'created',)
+        fields = ('id', 'owner', 'title', 'created', 'updated')
 
 
 class CommentSerializer(serializers.ModelSerializer):

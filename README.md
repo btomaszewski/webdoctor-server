@@ -35,6 +35,11 @@ The code should conform to Python's [PEP8](https://www.python.org/dev/peps/pep-0
 style guide. Comments are not mandatory but almost everything should be
 commented.
 
+### Settings
+Timezones are disabled because it was going to be way too complicated to deal with them.
+Instead all times are in UTC with an offset of zero (0) hours. Clients should convert
+times to a timezone suited to their needs.
+
 ### Modules
 The `discussion` module deals with the integrated discussion boards.
 
